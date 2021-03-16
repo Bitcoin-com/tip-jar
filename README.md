@@ -1,2 +1,2 @@
-# tip-calculator
+# TipJar
 Android Coding Assignment
