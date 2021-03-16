@@ -1,9 +1,10 @@
 # TipJar
 Android Coding Assignment
 
-# Goal
+# Instructions
 Implement the following functionality and designs as specified: https://www.figma.com/file/Wjc3WG4kH8IFooV2DLv29v/TipJar?node-id=0%3A1
 Feel free to export any image resources.
+This project already set up some basic stucture such as HILT and Room. Feel free to clone this project to your own repository as a starting point but this is not a mandatory requirement.
 
 # Requirements
 - Use MVP architectural design
