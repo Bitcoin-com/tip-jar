@@ -1,15 +1,21 @@
 package com.example.tipjar
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.tipjar.core.base.BaseActivity
+import com.example.tipjar.database.TipDatabase
+import timber.log.Timber
+import javax.inject.Inject
 
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity(R.layout.activity_main) {
+
+    @Inject lateinit var database: TipDatabase
+
+    override fun inject() {
+        TipJarApplication.appComponent.inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_main)
+        Timber.d("")
     }
 }
