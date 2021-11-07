@@ -1,25 +1,29 @@
 package com.example.tipjar.di
 
 import android.content.Context
+import androidx.room.Room
 import com.example.tipjar.database.TipDatabase
+import com.example.tipjar.database.dao.TipHistoryDao
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
-@InstallIn(SingletonComponent::class)
 @Module
-object DatabaseModule {
+class DatabaseModule(private val context: Context) {
 
     @Singleton
     @Provides
-    fun providesTipDatabase(
-        @ApplicationContext context: Context
-    ): TipDatabase {
-        return TipDatabase.getInstance(context)
+    fun providesTipDatabase(): TipDatabase {
+        return Room.databaseBuilder(
+            context,
+            TipDatabase::class.java,
+            "tip_jar_database"
+        ).fallbackToDestructiveMigration().build()
     }
 
+    @Singleton
+    @Provides
+    fun providesTipHistoryRepository(database: TipDatabase): TipHistoryDao {
+        return database.getTipHistoryDao()
+    }
 }
