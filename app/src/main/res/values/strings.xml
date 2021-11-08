@@ -3,4 +3,13 @@
     <string name="dismiss">Dismiss</string>
     <string name="error_no_data_found">No data found.</string>
     <string name="generic_error">Oops! Something went wrong</string>
+    <string name="save_payment_success_message">Payment has been saved!</string>
+
+    <string name="enter_amount">Enter amount</string>
+    <string name="how_many_people">How many people?</string>
+    <string name="percent_tip">% TIP</string>
+    <string name="total_tip">Total Tip</string>
+    <string name="per_person">Per Person</string>
+    <string name="save_payment">Save payment</string>
+    <string name="take_photo_of_receipt">Take photo of receipt"</string>
 </resources>

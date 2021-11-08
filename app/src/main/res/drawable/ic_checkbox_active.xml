@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_checkbox_frame_active" />
+    <item
+        android:bottom="8dp"
+        android:drawable="@drawable/ic_checked_orange_active"
+        android:left="6dp"
+        android:right="6dp"
+        android:top="8dp" />
+</layer-list>

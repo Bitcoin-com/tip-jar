@@ -6,8 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "tip_history")
 data class TipHistory(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "timestamp") val timestamp: Long,
-    @ColumnInfo(name = "pax_count") val paxCount: Int,
-    @ColumnInfo(name = "tip_percentage") val tipPercentage: Float
+    @ColumnInfo(name = "payment") val payment: Double,
+    @ColumnInfo(name = "tip_amount") val tipAmount: Double,
+    @ColumnInfo(name = "receipt_photo_path") val receiptPhotoPath: String
 ) : RoomEntity

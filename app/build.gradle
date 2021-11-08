@@ -1,6 +1,9 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
 
 android {
     compileSdkVersion 30
@@ -28,14 +31,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-}
-
-buildscript {
-    repositories {
-        jcenter()
-        google()
-        maven { url ' https://jitpack.io ' }
     }
 }
 
@@ -68,4 +63,9 @@ dependencies {
     implementation "androidx.room:room-runtime:2.3.0"
     implementation "androidx.room:room-ktx:2.3.0"
     kapt "androidx.room:room-compiler:2.2.6" because("Room annotations")
+
+    implementation 'org.joda:joda-money:1.0.1'
+
+    implementation 'com.evernote:android-state:1.4.1'
+    kapt 'com.evernote:android-state-processor:1.4.1'
 }
