@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.evernote.android.state.StateSaver
 import com.example.tipjar.core.extensions.getLastFragmentTag
 import com.example.tipjar.core.extensions.logDebug
 import org.greenrobot.eventbus.EventBus
@@ -33,6 +34,7 @@ abstract class BaseFragment<V : BaseFragmentView> : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        StateSaver.restoreInstanceState(this, savedInstanceState)
         onViewCreated(contentView, savedInstanceState)
     }
 
@@ -67,5 +69,10 @@ abstract class BaseFragment<V : BaseFragmentView> : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         viewModelStore.clear()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        StateSaver.saveInstanceState(this, outState)
     }
 }
