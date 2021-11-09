@@ -3,27 +3,33 @@ package com.example.tipjar.main.fragments
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import com.evernote.android.state.State
+import com.example.tipjar.BuildConfig
 import com.example.tipjar.R
 import com.example.tipjar.TipJarApplication
 import com.example.tipjar.core.base.BaseFragmentLifeCycle
 import com.example.tipjar.core.bundlers.MainConfigurationBundler
+import com.example.tipjar.core.extensions.addFragmentHorizontally
 import com.example.tipjar.core.extensions.showErrorSnackbar
+import com.example.tipjar.core.helpers.FileHelper
 import com.example.tipjar.core.helpers.ToastHelper
 import com.example.tipjar.core.taskStatus.TaskStatus
-import com.example.tipjar.core.utils.FileHelper
 import com.example.tipjar.database.TipDatabase
 import com.example.tipjar.database.entities.TipHistory
 import com.example.tipjar.main.configurations.MainConfiguration
 import com.example.tipjar.main.viewModels.MainViewModel
 import com.example.tipjar.main.views.MainView
 import com.example.tipjar.main.views.MainViewDelegate
+import com.example.tipjar.paymentsHistory.fragments.PaymentsHistoryFragment
 import kotlinx.android.synthetic.main.view_main.*
 import org.joda.money.Money
+import java.io.File
+import java.io.IOException
+import java.util.*
 import javax.inject.Inject
 
 class MainFragment : BaseFragmentLifeCycle<MainViewModel, MainView>(), MainViewDelegate {
@@ -35,17 +41,14 @@ class MainFragment : BaseFragmentLifeCycle<MainViewModel, MainView>(), MainViewD
         get() {
             return field ?: MainConfiguration()
         }
+    @State var receiptPhotoPath: String? = null
 
     private val resultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         receiptPhotoCheckbox.isChecked = if (result.resultCode == Activity.RESULT_OK) {
-            val bitmap = result.data?.extras?.get("data") as Bitmap
-            FileHelper.saveBitmapToFile(
-                contentView.context,
-                bitmap
-            )?.let {
-                configuration = configuration?.copy(receiptPhotoPath = it)
+            receiptPhotoPath?.let {
+                configuration = configuration?.copy(receiptPhotoPath = receiptPhotoPath)
                 configureSaveButton()
                 true
             } ?: false
@@ -80,6 +83,7 @@ class MainFragment : BaseFragmentLifeCycle<MainViewModel, MainView>(), MainViewD
                         R.string.save_payment_success_message
                     )
                     configuration = MainConfiguration()
+                    receiptPhotoPath = null
                     contentView.setUpView(configuration!!)
                 }
                 is TaskStatus.Failure -> {
@@ -96,8 +100,7 @@ class MainFragment : BaseFragmentLifeCycle<MainViewModel, MainView>(), MainViewD
     }
 
     override fun onTakePhotoOfReceipt() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        resultLauncher.launch(takePictureIntent)
+        dispatchTakePictureIntent()
     }
 
     override fun onPaymentChanged(payment: Money) {
@@ -112,7 +115,7 @@ class MainFragment : BaseFragmentLifeCycle<MainViewModel, MainView>(), MainViewD
     override fun onSavePayment() {
         viewModel.saveTip(
             TipHistory(
-                timestamp = System.currentTimeMillis(),
+                paymentDate = Date(),
                 payment = configuration?.payment!!,
                 tipAmount = configuration?.totalTipAmount!!,
                 receiptPhotoPath = configuration?.receiptPhotoPath!!
@@ -124,8 +127,41 @@ class MainFragment : BaseFragmentLifeCycle<MainViewModel, MainView>(), MainViewD
         configuration = configuration?.copy(tipPercent = percent)
     }
 
+    override fun openPaymentsHistory() {
+        childFragmentManager.beginTransaction().addFragmentHorizontally(
+            containerId = R.id.mainFragmentContainer,
+            fragmentClass = PaymentsHistoryFragment::class.java,
+            addToBackStack = true
+        ).commit()
+    }
+
     private fun configureSaveButton() {
         val isEnable = configuration?.payment!! > 0.01 && configuration?.receiptPhotoPath != null
         contentView.setSavePaymentButtonEnabled(isEnable)
+    }
+
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(contentView.context.packageManager)?.also {
+                val photoFile: File? = try {
+                    FileHelper.createImageFile(contentView.context).also {
+                        receiptPhotoPath = it.absolutePath
+                    }
+                } catch (e: IOException) {
+                    contentView.showErrorSnackbar(e.message ?: getString(R.string.generic_error))
+                    null
+                }
+
+                photoFile?.also {
+                    val photoURI = FileProvider.getUriForFile(
+                        contentView.context,
+                        BuildConfig.APPLICATION_ID + ".provider",
+                        it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    resultLauncher.launch(takePictureIntent)
+                }
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.tipjar.core.utils
+package com.example.tipjar.core.helpers
 
 import android.content.res.Resources
 

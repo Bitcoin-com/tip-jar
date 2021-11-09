@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="@drawable/ripple_default">
+
+    <TextView
+        android:id="@+id/paymentDate"
+        style="@style/MediumTextStyle.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2021 January 21" />
+
+    <TextView
+        android:id="@+id/paymentAmount"
+        style="@style/MediumTextStyle.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentDate"
+        tools:text="$205.23" />
+
+    <TextView
+        android:id="@+id/tipAmount"
+        style="@style/MediumTextStyle.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:textColor="@color/boulder_gray"
+        app:layout_constraintBottom_toBottomOf="@id/paymentAmount"
+        app:layout_constraintStart_toEndOf="@id/paymentAmount"
+        tools:text="2021 January 21" />
+
+    <ImageView
+        android:id="@+id/receiptPhoto"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginEnd="26dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
