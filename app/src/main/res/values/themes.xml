@@ -81,4 +81,15 @@
         </item>
     </style>
 
+    <style name="AppMaterialToolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextAppearance">@style/AppMaterialToolbar.TextAppearance</item>
+        <item name="titleCentered">true</item>
+        <item name="titleTextColor">@color/black</item>
+    </style>
+
+    <style name="AppMaterialToolbar.TextAppearance" parent="@style/TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">roboto</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

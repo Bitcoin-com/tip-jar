@@ -22,6 +22,7 @@ interface MainViewDelegate {
     fun onSavePayment()
     fun onTipPercentChanged(percent: Int)
     fun onTotalTipAmountChanged(tipAmount: Money)
+    fun openPaymentsHistory()
 }
 
 class MainView(context: Context) : BaseFragmentView(context) {
@@ -88,6 +89,10 @@ class MainView(context: Context) : BaseFragmentView(context) {
 
         savePayment.setDebounceClickListener {
             delegate?.onSavePayment()
+        }
+
+        paymentsHistory.setDebounceClickListener {
+            delegate?.openPaymentsHistory()
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.tipjar.core.extensions
 
 import android.graphics.drawable.Drawable
 import android.os.SystemClock
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
@@ -10,12 +11,19 @@ import androidx.annotation.StringRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import com.example.tipjar.R
-import com.example.tipjar.core.utils.ScreenHelper
+import com.example.tipjar.core.helpers.ScreenHelper
 import com.google.android.material.snackbar.Snackbar
 
 fun View.dp(value: Int): Int = context.dp(value)
 fun View.dp(value: Float): Float = context.dp(value)
 fun View.sp(value: Float): Float = context.sp(value)
+fun View.dpToPx(dp: Float): Float {
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        12f,
+        resources.displayMetrics
+    )
+}
 
 fun View.getCompatDrawable(@DrawableRes id: Int): Drawable? {
     return context.getCompatDrawable(id)
