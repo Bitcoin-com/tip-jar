@@ -16,4 +16,7 @@ interface TipHistoryDao : BaseRoomDao<TipHistory> {
 
     @Query("SELECT * FROM tip_history ORDER BY payment_date DESC")
     suspend fun findAllSortByDate(): List<TipHistory>
+
+    @Query("DELETE FROM tip_history WHERE id in (:ids)")
+    suspend fun delete(ids: List<Int>)
 }

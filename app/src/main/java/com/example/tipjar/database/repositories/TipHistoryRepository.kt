@@ -14,4 +14,5 @@ class TipHistoryRepository @Inject constructor(
     override suspend fun find(id: Int) = dao.find(id)
 
     suspend fun findAllSortByDate() = dao.findAllSortByDate()
+    suspend fun delete(ids: List<Int>) = dao.delete(ids)
 }

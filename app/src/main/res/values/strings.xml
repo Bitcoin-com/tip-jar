@@ -11,5 +11,11 @@
     <string name="total_tip">Total Tip</string>
     <string name="per_person">Per Person</string>
     <string name="save_payment">Save payment</string>
-    <string name="take_photo_of_receipt">Take photo of receipt"</string>
+    <string name="take_photo_of_receipt">Take photo of receipt</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_payment_success_message">Payment has been successfully removed!</string>
+    <string name="delete_payments_success_message">Payments has been successfully removed!</string>
+    <string name="no_items_found">No items found.</string>
+    <string name="select_all">Select all</string>
 </resources>
