@@ -30,6 +30,8 @@ Once you have completed the assignment, push the code up to a new private repo a
 
 - Use MVVM architectural design
 - Use Hilt Dependency Injection (Dagger2 or Koin is acceptable as well)
+- Use Jetpack compose for your project
+- Some of the libraries in this template are outdated. Please update and modernize the components as you see fit. 
 - Write tests for the models you have created
 - Your project should be able to run
 
