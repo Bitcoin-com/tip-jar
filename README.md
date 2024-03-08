@@ -33,6 +33,7 @@ Once you have completed the assignment, push the code up to a new private repo a
 - Use Jetpack compose for your project
 - Some of the libraries in this template are outdated. Please update and modernize the components as you see fit. 
 - Write tests for the models you have created
+- Include a text file summarising how you used AI to complete the assignment. Identify parts of the code where you used AI heavily, and others where you used it lightly.
 - Your project should be able to run
 
 ## Bonus
