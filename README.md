@@ -22,6 +22,8 @@ Once you have completed the assignment, push the code up to a new private repo a
         - jonathan@bitcoin.com
         - brendon@bitcoin.com    
         - mahdi@bitcoin.com
+        - minh@bitcoin.com
+        - percival@bitcoin.com
         
 ***Then notify your Bitcoin.com hiring contact with a link to your private repo.***
 
