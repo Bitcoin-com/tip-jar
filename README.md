@@ -41,7 +41,8 @@ Once you have completed the assignment, push the code up to a new private repo a
 ## Bonus
     
 1. Implement Delete and Search Receipts functionality
-3. Change currency functonality
+2. Change currency functonality
+3. Use AI image processing to parse numbers from reciepts
 4. Animations or any UI elements to spice up the app. (Go wild!)
 
 
